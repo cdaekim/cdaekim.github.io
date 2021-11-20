@@ -222,8 +222,8 @@ text {
   			d.target.degree += 1;
   		});
   			
-  		var minDegree = d3.min(d3.values(nodes), function(d){return d.degree;});
-  		var maxDegree = d3.max(d3.values(nodes), function(d){return d.degree;});
+  		var minDegree = d3.min(d3.values(node), function(d){return d.degree;});
+  		var maxDegree = d3.max(d3.values(node), function(d){return d.degree;});
   		var scaleNodes = d3.scaleLinear().domain([minDegree, maxDegree]).range([5,15]);
 
                 node.append("circle")
@@ -258,7 +258,7 @@ text {
   		};
 
                 const t = d3.timer((elapsed) => {
-                    if (elapsed > 150*nodes.length) { // timer scaled off # nodes. approx 4.5sec for 30 nodes
+                    if (elapsed > 150*node.length) { // timer scaled off # nodes. approx 4.5sec for 30 nodes
                         t.stop(); // stop timer
                         force.stop(); // stop force simulation
                         console.log("seconds elapsed before stopping force simulation: "+(elapsed/1000).toPrecision(4))
