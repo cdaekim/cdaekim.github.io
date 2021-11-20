@@ -141,9 +141,6 @@ text {
                 		.attr("width", width)
                 		.attr("height", height);
 
-            //Hyeong-sun, change the variables accordingly to make it dynamic
-            //re: Check out the graph1 file on the github repo for reference
-
             var select = document.querySelectorAll("select");
 
             var regionList = document.getElementById("regionDropdown");
@@ -260,7 +257,14 @@ text {
       			});
   		};
 
-
+                const t = d3.timer((elapsed) => {
+                    if (elapsed > 150*nodes.length) { // timer scaled off # nodes. approx 4.5sec for 30 nodes
+                        t.stop(); // stop timer
+                        force.stop(); // stop force simulation
+                        console.log("seconds elapsed before stopping force simulation: "+(elapsed/1000).toPrecision(4))
+                    }
+                });
+		    
                 function dragstarted(d) {
                     if (!d3.event.active) force.alphaTarget(0.3).restart();
                     d.fx = d.x;
