@@ -192,7 +192,7 @@ text {
       				.force("y", d3.forceY())
       				.force("charge", d3.forceManyBody().strength(-100))
       				.alphaTarget(1)
-				.tick(300);
+				.on("tick",300);
                 
   		var path = svg.append("g")
       				.selectAll("path")
