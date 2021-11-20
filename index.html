@@ -133,9 +133,9 @@ text {
             })
 
         ]).then(function (files) {
-        	var margin = {top:50, right:50, bottom:50, left:50},
-						width = window.innerWidth - margin.left - margin.right,
-						height = window.innerHeight - margin.top - margin.bottom;
+            var margin = {top:50, right:50, bottom:50, left:50},
+			 width = window.innerWidth - margin.left - margin.right,
+			 height = window.innerHeight - margin.top - margin.bottom;
 
             var svg = d3.select("body").append("svg")
                 		.attr("width", width)
@@ -257,13 +257,16 @@ text {
       			});
   		};
 
-                const t = d3.timer((elapsed) => {
-                    if (elapsed > 150*node.length) { // timer scaled off # nodes. approx 4.5sec for 30 nodes
-                        t.stop(); // stop timer
-                        force.stop(); // stop force simulation
-                        console.log("seconds elapsed before stopping force simulation: "+(elapsed/1000).toPrecision(4))
-                    }
-                });
+		const simulationDurationInMs = 20000; // 20 seconds
+
+		let startTime = Date.now();
+		let endTime = startTime + simulationDurationInMs;
+
+		function onSimulationTick() {
+    			if (Date.now() > endTime) {
+       				force.stop()
+			}
+		};
 		    
                 function dragstarted(d) {
                     if (!d3.event.active) force.alphaTarget(0.3).restart();
