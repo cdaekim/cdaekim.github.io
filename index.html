@@ -255,19 +255,15 @@ text {
       			node.attr("transform", function(d) {
           				return "translate(" + d.x + "," + d.y + ")"; 
       			});
-  		};
-
-		const simulationDurationInMs = 10000;
-
-		let startTime = Date.now();
-		let endTime = startTime + simulationDurationInMs;
-
-		function onSimulationTick() {
-    			if (Date.now() > endTime) {
+			const simulationDurationInMs = 10000;
+			let startTime = Date.now();
+			let endTime = startTime + simulationDurationInMs;
+			
+			if (Date.now() > endTime) {
        				force.stop()
-			}
-		};
-		    
+			};
+  		};
+	    
                 function dragstarted(d) {
                     if (!d3.event.active) force.alphaTarget(0.3).restart();
                     d.fx = d.x;
