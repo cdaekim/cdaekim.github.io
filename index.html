@@ -298,7 +298,13 @@
                         return "translate(" + d.x + "," + d.y + ")";
                     });
                 };
-
+                
+                const t = d3.timer((elapsed) => {
+                    if (elapsed > 100*Object.keys(nodes).length) { 
+                        t.stop();
+                        force.stop(); 
+                    }
+                });
 
                 function dragstarted(d) {
                     if (!d3.event.active) force.alphaTarget(0.3).restart();
